@@ -3,7 +3,6 @@
   flex-direction: row;
 }
 
-
 .list-section {
   margin-top: 20px;
   width: 100%;
@@ -34,6 +33,12 @@
   cursor: pointer;
 }
 
+
 .list-section li:hover {
   color: rgba(245, 245, 245, 0.7);
+}
+
+.search-console{
+  display: block;
+
 }

@@ -15,7 +15,7 @@ const Navbar = () => {
         {/* Logo Image and Input */}
         <img src={logo} alt='reelmate logo' />
         <div className='search-console'>
-        <input placeholder=' Search Here' />
+        <input className='input' placeholder=' Search Here' />
         <button>Search</button>
         </div>
 
@@ -46,7 +46,7 @@ const Navbar = () => {
           </ul>
         </div>
 
-        <button>Create A List</button>
+        <button> + Create A List</button>
         <button>Sign In</button>
       </nav>
     </header>

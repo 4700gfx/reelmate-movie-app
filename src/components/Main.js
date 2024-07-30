@@ -27,6 +27,7 @@ const Main = () => {
 
   return (
     <div className='carousel-container'>
+      <h1 className='center'> OUT NOW</h1>
       <section>
       {movies.length > 0 ? (
         <Carousel className='carousel' showThumbs={false} infiniteLoop={true} autoPlay={true} showStatus={false}>

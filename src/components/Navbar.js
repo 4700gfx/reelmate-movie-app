@@ -1,9 +1,52 @@
-import React from 'react'
+import React from 'react';
+import logo from '../assets/images/reelmate-logo.png';
 
 const Navbar = () => {
-  return (
-    <div>Navbar</div>
-  )
-}
+  const tabs = {
+    home: 'Home',
+    library: 'Library',
+    friends: 'Friends',
+    myList: 'My List',
+  };
 
-export default Navbar
+  return (
+    <header>
+      <nav>
+        {/* Logo Image and Input */}
+        <img src={logo} alt='reelmate logo' />
+        <input />
+
+        {/* List Items Mapped By Object */}
+        <ul>
+          {Object.keys(tabs).map(tab => (<li key={tab}>{tabs[tab]}</li>))}
+        </ul>
+
+        {/* User List Section */}
+        <div className='list-section'>
+          <h4>WATCH LIST</h4>
+          <ul>
+            <li>Anime</li>
+            <li>Movies</li>
+            <li>Denzel Movies</li>
+          </ul>
+        </div>
+
+        <div className='list-section'>
+          <h4>CATAGORIES</h4>
+          <ul>
+            <li>Drama</li>
+            <li>Action</li>
+            <li>Comedies</li>
+            <li>Anime</li>
+            <li>Marvel/DC Movies</li>
+            <li>Documentaries</li>
+          </ul>
+        </div>
+
+        <button>Create A List</button>
+      </nav>
+    </header>
+  );
+};
+
+export default Navbar;

@@ -2,7 +2,103 @@ body {
   margin: 0;
   font-family: "Hanken Grotesk", sans-serif;
   background-color: rgba(8, 9, 13, 1);
+  color: rgba(245, 245, 245, 1);
+}
+
+header {
+  background-color: rgba(57, 66, 86, 1);
+  height: 1000px;
+  border-radius: 10px;
+  width: 15%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+nav {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header img {
+  width: 30%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+header input {
+  margin-bottom: 20px;
+  height: 18px;
+  width: 80%;
+  border: none;
+  border-radius: 10px;
+
+}
+
+header button{
+  width: 80%;
+  height: 30px;
+  background-color: rgba(242, 155, 48);
   color: rgba(245, 245, 245);
+  border: none;
+  border-radius: 10px;
+  margin-top: 20px;
 }
 
 
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align items to the left */
+  width: 100%;
+}
+
+nav ul li {
+  width: 100%;
+  text-align: left; /* Align text to the left */
+  padding: 10px 20px; /* Add padding for better appearance */
+  padding-left: 20px; /* Move the list items more to the left */
+  cursor: pointer;
+}
+
+nav ul li:hover {
+  color: rgba(245, 245, 245, 0.7);
+}
+
+.list-section {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align items to the left */
+}
+
+.list-section h4 {
+  margin-bottom: 10px;
+  padding-left: 20px; /* Ensure heading is also aligned left */
+}
+
+.list-section ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align items to the left */
+  width: 100%;
+}
+
+.list-section li {
+  width: 100%;
+  text-align: left; /* Align text to the left */
+  padding: 10px 20px; /* Add padding for better appearance */
+  padding-left: 20px; /* Move the list items more to the left */
+  cursor: pointer;
+}
+
+.list-section li:hover {
+  color: rgba(245, 245, 245, 0.7);
+}

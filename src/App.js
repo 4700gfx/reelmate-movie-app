@@ -15,7 +15,6 @@ function App() {
       <MovieList></MovieList>
       </section>
       </div>
-      <Footer></Footer>
     </div>
   );
 }

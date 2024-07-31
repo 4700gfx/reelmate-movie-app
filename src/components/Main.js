@@ -1,4 +1,4 @@
-// components/Main.js
+//Hero Section
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Carousel } from 'react-responsive-carousel';
@@ -29,8 +29,11 @@ const Main = () => {
     <div className='carousel-container'>
       <h1 className='center'> OUT NOW</h1>
       <section>
+      {/* Checks To See If The Movie Data Array Length Is More Than Zero */}
       {movies.length > 0 ? (
         <Carousel className='carousel' showThumbs={false} infiniteLoop={true} autoPlay={true} showStatus={false}>
+          {/* Maps The Movie Data Array Into The Carousel Component */}
+            {/* JSX For Each Movie In The Movie Data Array  */}
           {movies.map(movie => (
             <div key={movie.id} className='carousel-slide'>
               <div className='movie-card'>
@@ -48,33 +51,34 @@ const Main = () => {
         <p>Loading movies...</p>
       )}
       </section>
+      
       <h1 className='center'>HOW TO USE THIS APP</h1>
       <div className='instruction-container'>
 
-      <div className='instruction'>
-      <h2>Press Create A List</h2>
-      <p>Press Create a List to Start Looking Into Our Database of Different Actors, Shows and Movies. Add The The Name and Purpose of Your List </p>
-      </div>
+        <div className='instruction'>
+        <h2>Press Create A List</h2>
+        <p>Press Create a List to Start Looking Into Our Database of Different Actors, Shows and Movies. Add The The Name and Purpose of Your List </p>
+        </div>
 
-      <div className='instruction'>
-      <h2>Search Your Favorites</h2>
-      <p>
-        Search for your favorites within our database of different actors, shows and movies. 
-      </p>
-      </div>
+        <div className='instruction'>
+          <h2>Search Your Favorites</h2>
+          <p>
+            Search for your favorites within our database of different actors, shows and movies. 
+          </p>
+        </div>
 
-      <div className='instruction'>
-      <h2>Add To Your List</h2>
-      <p>
-        Add to your list of favorites and organize them into different actors, catagories and more.
-      </p>
-      </div>
-      <div className='instruction'>
-      <h2>Check Off When Done</h2>
-      <p>
-        Check off the list of episodes when watched and share different reviews of your favorite shows.
-      </p>
-      </div>  
+        <div className='instruction'>
+          <h2>Add To Your List</h2>
+          <p>
+            Add to your list of favorites and organize them into different actors, catagories and more.
+          </p>
+        </div>
+        <div className='instruction'>
+          <h2>Check Off When Done</h2>
+          <p>
+            Check off the list of episodes when watched and share different reviews of your favorite shows.
+          </p>
+        </div>  
       </div>
 
     </div>

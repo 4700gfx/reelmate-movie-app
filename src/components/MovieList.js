@@ -60,8 +60,9 @@ const MovieList = () => {
                 <h3>{anime.name}</h3>
               </div>
               <div className="anime-hover-info">
-                <p>Rank: {index + 1}</p>
+                <p className="rank-title">Rank: {index + 1}</p>
                 <p>{anime.overview}</p>
+                <button>Watch Now</button>
               </div>
             </div>
           ))}
@@ -81,7 +82,7 @@ const MovieList = () => {
                 <h3>{tvShow.name}</h3>
               </div>
               <div className="tv-hover-info">
-                <p>Rank: {index + 1}</p>
+                <p className="rank-title">Rank: {index + 1}</p>
                 <p>{tvShow.overview}</p>
               </div>
             </div>
@@ -102,7 +103,7 @@ const MovieList = () => {
                 <h3>{actor.name}</h3>
               </div>
               <div className="actor-hover-info">
-                <p>Rank: {index + 1}</p>
+                <p className="rank-title">Rank: {index + 1}</p>
                 <p>Known for: {actor.known_for.map(movie => movie.title || movie.name).join(', ')}</p>
               </div>
             </div>

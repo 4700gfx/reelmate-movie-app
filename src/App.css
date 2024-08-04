@@ -85,6 +85,27 @@
   display: block;
 }
 
+
+.social-console {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.social-console img {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s;
+}
+
+.social-console img:hover {
+  transform: scale(1.2);
+}
+
+
+
+
+
 /* Carousel Stylesheet  */
 
 .control-arrow {
@@ -255,6 +276,13 @@
   box-sizing: border-box;
 }
 
+.anime-hover-info, .tv-hover-info, .actor-hover-info p{
+  padding: 25px 5px;
+}
+
+
+
+
 .anime-card:hover, .tv-card:hover, .actor-card:hover {
   transform: scale(1.05);
 }
@@ -262,6 +290,16 @@
 .anime-card:hover .anime-hover-info, .tv-card:hover .tv-hover-info, .actor-card:hover .actor-hover-info {
   opacity: 1;
 }
+
+.rank-title{
+  font-style: italic;
+  font-size: 30px;
+  color: #ff6347;
+}
+
+
+
+
 
 .center {
   text-align: center;

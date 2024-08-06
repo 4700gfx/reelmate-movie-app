@@ -2,8 +2,24 @@
 import React from 'react';
 
 
-const DetailedModal = ({ isOpen, onClose, results, onActorClick, onMovieClick }) => {
+const DetailedModal = ({ isOpen, onClose, results, onActorClick, onMovieClick, onShowClick }) => {
   if (!isOpen) return null;
+
+  const handleClick = (result) => {
+    switch (result.media_type) {
+      case 'person':
+        onActorClick(result.id);
+        break;
+      case 'movie':
+        onMovieClick(result.id);
+        break;
+      case 'tv':
+        onShowClick(result.id);
+        break;
+      default:
+        break;
+    }
+  };
 
   return (
     <div className='modal-overlay'>
@@ -15,7 +31,7 @@ const DetailedModal = ({ isOpen, onClose, results, onActorClick, onMovieClick })
             <li 
               key={result.id} 
               className='result-item' 
-              onClick={() => result.media_type === 'person' ? onActorClick(result.id) : onMovieClick(result.id)}
+              onClick={() => handleClick(result)}
             >
               {result.poster_path ? (
                 <img 

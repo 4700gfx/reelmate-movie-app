@@ -41,7 +41,7 @@ const MovieDetailsModal = ({ isOpen, onClose, movieId }) => {
             <button> Watch Now</button>
             </div>
             <p className='move-details'>{movieDetails.overview}</p>
-            <ul>
+            <ul className='additional-details'>
               <li>{movieDetails.popularity}</li>
               <li>{movieDetails.runtime}</li>
               <li>{movieDetails.status = "Released" ? "Out In Theathers" : "Coming Soon"}</li>

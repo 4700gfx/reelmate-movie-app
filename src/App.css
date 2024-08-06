@@ -43,7 +43,10 @@
   height: 30px;
 }
 
-
+.additional-details li{
+  list-style-type: none;
+  
+}
 
 
 

@@ -12,7 +12,7 @@ const ActorMoviesModal = ({ isOpen, onClose, actorId, onMovieClick }) => {
   }, [actorId]);
 
   const fetchActorMovies = async (actorId) => {
-    const API_KEY = '57e7da297e7cfe3c1ceff135422b6c96'; // Replace with your actual TMDB API key
+    const API_KEY = '57e7da297e7cfe3c1ceff135422b6c96'; 
     const response = await fetch(`https://api.themoviedb.org/3/person/${actorId}/movie_credits?api_key=${API_KEY}`);
     const data = await response.json();
     setMovies(data.cast);

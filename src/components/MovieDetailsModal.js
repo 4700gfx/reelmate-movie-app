@@ -26,7 +26,7 @@ const MovieDetailsModal = ({ isOpen, onClose, movieId }) => {
 
   return (
     <div className='modal-overlay' id='movie-modal'>
-      <div className='modal'>
+      <div className='modal movie-modal-container'>
         <button className='close-button' onClick={onClose}>X</button>
         {movieDetails ? (
           <>
@@ -42,8 +42,8 @@ const MovieDetailsModal = ({ isOpen, onClose, movieId }) => {
             </div>
             <p className='move-details'>{movieDetails.overview}</p>
             <ul className='additional-details'>
-              <li>{movieDetails.popularity}</li>
-              <li>{movieDetails.runtime}</li>
+              <li>{movieDetails.popularity + " " + "Out of 10"}</li>
+              <li>{movieDetails.runtime + " " + "Mintues"}</li>
               <li>{movieDetails.status = "Released" ? "Out In Theathers" : "Coming Soon"}</li>
             </ul>
           </>

@@ -22,7 +22,6 @@ const Modal = ({ isOpen, onClose, results, onOptionSelect }) => {
                 <div className='no-image'>No Image</div>
               )}
               <div>{result.title || result.name}</div>
-              <div>Type: {result.media_type}</div>
             </li>
           ))}
         </ul>

@@ -37,7 +37,7 @@ const ShowDetailsModal = ({ isOpen, onClose, showId }) => {
         <ul className='additional-details'>
             <li>{showDetails.popularity}</li>
             <li>{showDetails.runtime}</li>
-           <li>{showDetails.status = "Released" ? "Out In Theathers" : "Coming Soon"}</li>
+           <li>{showDetails.status = "Released" ? "Airing Now" : "Coming Soon"}</li>
         </ul>
       </div>
     </div>

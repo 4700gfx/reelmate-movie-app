@@ -45,8 +45,10 @@
 
 .additional-details li{
   list-style-type: none;
-  
+
 }
+
+
 
 
 
@@ -437,6 +439,13 @@
   max-height: 80vh; /* Ensure it doesn't go off the screen */
 }
 
+.results-list img{
+  width: 20%;
+  margin-right: 10px;
+}
+
+
+
 .close-button {
   background: red;
   color: white;
@@ -446,32 +455,60 @@
   float: right;
   cursor: pointer;
 }
-
 .results-list {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .result-item {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   cursor: pointer;
 }
 
-.result-item img {
-  margin-right: 10px;
-  width: 50px;
-  height: 75px;
+.result-list-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.result-image {
+  width: 100px;
+  height: 150px;
   object-fit: cover;
+  margin-right: 20px;
+}
+
+.result-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.result-title {
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+.add-to-list-button {
+  align-self: flex-start;
+  background-color: #ff6347;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .no-image {
-  width: 50px;
-  height: 75px;
-  background: grey;
+  width: 100px;
+  height: 150px;
+  background-color: #ddd;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  margin-right: 20px;
 }
+

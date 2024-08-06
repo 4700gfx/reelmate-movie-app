@@ -25,7 +25,7 @@ const DetailedModal = ({ isOpen, onClose, results, onActorClick, onMovieClick, o
     <div className='modal-overlay'>
       <div className='modal'>
         <button className='close-button' onClick={onClose}>X</button>
-        <h2>Detailed Results</h2>
+        <h2>Filter Results</h2>
         <ul className='results-list'>
           {results.map((result) => (
             <li 
@@ -33,15 +33,21 @@ const DetailedModal = ({ isOpen, onClose, results, onActorClick, onMovieClick, o
               className='result-item' 
               onClick={() => handleClick(result)}
             >
-              {result.poster_path ? (
-                <img 
-                  src={`https://image.tmdb.org/t/p/w200${result.poster_path}`} 
-                  alt={result.title || result.name} 
-                />
-              ) : (
-                <div className='no-image'>No Image</div>
-              )}
-              <div>{result.title || result.name}</div>
+              <div className='result-list-container'>
+                {result.poster_path ? (
+                  <img 
+                    src={`https://image.tmdb.org/t/p/w200${result.poster_path}`} 
+                    alt={result.title || result.name} 
+                    className='result-image'
+                  />
+                ) : (
+                  <div className='no-image'>No Image</div>
+                )}
+                <div className='result-text'>
+                  <div className='result-title'>{result.title || result.name}</div>
+                  <button className='add-to-list-button'>Add To List +</button>
+                </div>
+              </div>
             </li>
           ))}
         </ul>

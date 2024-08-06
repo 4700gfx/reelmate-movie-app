@@ -1,11 +1,14 @@
-import React from 'react';
+// Navbar.js
+import React, { useState } from 'react';
 import logo from '../assets/images/reelmate-logo.png';
 import instagram from '../assets/images/instagram.png';
 import facebook from '../assets/images/facebook-logo-in-circular-shape.png';
 import twitter from '../assets/images/twitter.png';
 import youtube from '../assets/images/youtube.png';
 
-const Navbar = () => {
+const Navbar = ({ onSearch }) => {
+  const [query, setQuery] = useState('');
+
   const tabs = {
     home: 'Home',
     library: 'Library',
@@ -20,24 +23,30 @@ const Navbar = () => {
     youtube: youtube,
   };
 
+  const handleSearch = () => {
+    onSearch(query);
+  };
+
   return (
     <header>
       <nav>
-        {/* Logo Image and Input */}
         <img src={logo} alt='reelmate logo' />
         <div className='search-console'>
-          <input className='input' placeholder=' Search Here' />
-          <button>Search</button>
+          <input
+            className='input'
+            placeholder='Search Here'
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <button onClick={handleSearch}>Search</button>
         </div>
 
-        {/* List Items Mapped By Object */}
         <ul>
           {Object.keys(tabs).map(tab => (
             <li key={tab}>{tabs[tab]}</li>
           ))}
         </ul>
 
-        {/* User List Section */}
         <div className='list-section'>
           <h4>WATCH LIST</h4>
           <ul>

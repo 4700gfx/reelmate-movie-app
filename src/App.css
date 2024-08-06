@@ -1,12 +1,14 @@
 .App {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   min-height: 100vh;
 }
 
-.app-container{
+.app-content{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .center {
@@ -14,6 +16,36 @@
   align-items: center;
   justify-content: center;
 }
+
+
+.movie-header{
+  display: flex;
+  flex-direction: column;
+}
+
+
+.movie-header img{
+  height: 550px;
+  width: 80%;
+  margin: 10px auto;
+}
+
+
+.movie-header button{
+  width: 50%;
+  margin: 5px auto;
+  border: 2px solid rgba(242, 155, 48);;
+  background-color: rgba(242, 155, 48);;
+  font-family: inherit;
+  border-radius: 10px;
+  transition: all ease-in-out 0.2s;
+  font-size: 13px;
+  height: 30px;
+}
+
+
+
+
 
 /* Side Panel Stylesheet  */
 
@@ -217,13 +249,14 @@
 }
 
 .instruction-container h2{
-  margin-left: 150px;
+  align-items: center;
+  justify-content: center;
 }
 
 .instruction-container p {
-  width: 80%;
+  width: 100%;
   margin: 10px auto;
-  text-align: center;
+  text-align: left;
 }
 
 
@@ -296,9 +329,6 @@
   font-size: 30px;
   color: #ff6347;
 }
-
-
-
 
 
 .center {
@@ -377,4 +407,68 @@
 
 .footer-social-links a:hover img {
   filter: invert(0.5);
+}
+
+/* Modal.css */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it overlays other content */
+}
+
+.modal {
+  background: white;
+  color: black;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 500px;
+  overflow-y: auto;
+  max-height: 80vh; /* Ensure it doesn't go off the screen */
+}
+
+.close-button {
+  background: red;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  float: right;
+  cursor: pointer;
+}
+
+.results-list {
+  list-style: none;
+  padding: 0;
+}
+
+.result-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.result-item img {
+  margin-right: 10px;
+  width: 50px;
+  height: 75px;
+  object-fit: cover;
+}
+
+.no-image {
+  width: 50px;
+  height: 75px;
+  background: grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
 }

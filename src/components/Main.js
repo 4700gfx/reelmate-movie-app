@@ -57,20 +57,22 @@ const Main = () => {
 
         <div className='instruction'>
         <h2>Press Create A List</h2>
-        <p>Press Create a List to Start Looking Into Our Database of Different Actors, Shows and Movies. Add The The Name and Purpose of Your List </p>
+        <p>
+        Press Create a List to Start Looking Into Our Database of Different Actors, Shows and Movies. Add The The Name and Purpose of Your List. 
+        </p>
         </div>
 
         <div className='instruction'>
           <h2>Search Your Favorites</h2>
           <p>
-            Search for your favorites within our database of different actors, shows and movies. 
+            Search for your favorites within our database of different actors, shows and movies. Filter down your options to the our database of different actor, shows and movies. 
           </p>
         </div>
 
         <div className='instruction'>
           <h2>Add To Your List</h2>
           <p>
-            Add to your list of favorites and organize them into different actors, catagories and more.
+            Add to your list of favorites and organize them into different actors, catagories and more. Switch to checklist mode to turn your movie list into a watch list. 
           </p>
         </div>
         <div className='instruction'>

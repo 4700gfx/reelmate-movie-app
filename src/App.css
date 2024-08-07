@@ -1,3 +1,5 @@
+/* Overall Style Sheet */
+
 .App {
   display: flex;
   flex-direction: row;
@@ -18,42 +20,68 @@
 }
 
 
-.movie-header{
+
+/* Movie and Show Modal Stylesheet */
+
+.full-movie-information, .full-show-information{
+  display: flex;
+  flex-direction: row;
+}
+
+.movie-header, .show-header {
   display: flex;
   flex-direction: column;
+  width: 40%;
+  margin-right: 10px;
 }
-
-
-.movie-header img{
-  height: 550px;
-  width: 80%;
-  margin: 10px auto;
-}
-
 
 .movie-header button{
-  width: 50%;
-  margin: 5px auto;
-  border: 2px solid rgba(242, 155, 48);;
-  background-color: rgba(242, 155, 48);;
+  border: 2px solid rgba(242, 155, 48);
+  background-color: rgba(242, 155, 48);
   font-family: inherit;
   border-radius: 10px;
-  transition: all ease-in-out 0.2s;
+  transition: all 0.2s ease-in-out;
   font-size: 13px;
   height: 30px;
+  width: 80%;
+  margin: 5px auto;
+  color: rgba(245, 245, 245, 1);
 }
 
-.additional-details li{
+.full-show-information button{
+  border: 2px solid rgba(242, 155, 48);
+  background-color: rgba(242, 155, 48);
+  font-family: inherit;
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
+  font-size: 13px;
+  height: 30px;
+  width: 80%;
+  margin: 5px auto;
+  color: rgba(245, 245, 245, 1);
+}
+
+
+
+.movie-description, .show-description {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  flex-grow: 1;
+  margin: auto 10px;
+  text-align: left;
+
+}
+
+.movie-description ul{
   list-style-type: none;
-
+  padding: 0;
+  margin: 0;
 }
-
-
 
 
 
 /* Side Panel Stylesheet  */
-
 .input {
   border-radius: 10px;
   outline: 2px solid #FEBF00;
@@ -138,8 +166,6 @@
 .social-console img:hover {
   transform: scale(1.2);
 }
-
-
 
 
 
@@ -231,6 +257,7 @@
   border-color: rgba(245, 245, 245, 1);
 }
 
+
 /* Instruction Section Stylesheet  */
 .instruction-container {
   display: grid;
@@ -265,6 +292,7 @@
 }
 
 
+/* Main Card Content Stylesheet */
 .anime-container, .tv-container, .actor-container {
   margin-bottom: 40px;
 }
@@ -320,7 +348,6 @@
 
 
 
-
 .anime-card:hover, .tv-card:hover, .actor-card:hover {
   transform: scale(1.05);
 }
@@ -336,14 +363,7 @@
 }
 
 
-.center {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-
-
-
+/* Footer Stylesheet */
 
 .footer-section {
   background-color: #333;
@@ -414,7 +434,10 @@
   filter: invert(0.5);
 }
 
-/* Modal.css */
+
+
+/* Modal Stylesheets */
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -434,7 +457,7 @@
   padding: 20px;
   border-radius: 8px;
   width: 80%;
-  max-width: 500px;
+  max-width: 600px;
   overflow-y: auto;
   max-height: 80vh; /* Ensure it doesn't go off the screen */
 }
@@ -443,7 +466,6 @@
   width: 20%;
   margin-right: 10px;
 }
-
 
 
 .close-button {
@@ -475,7 +497,7 @@
 }
 
 .result-image {
-  width: 100px;
+
   height: 150px;
   object-fit: cover;
   margin-right: 20px;
@@ -503,7 +525,7 @@
 }
 
 .no-image {
-  width: 100px;
+  width: 20%;
   height: 150px;
   background-color: #ddd;
   display: flex;

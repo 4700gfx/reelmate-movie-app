@@ -1,6 +1,4 @@
-// components/ShowDetailsModal.js
 import React, { useState, useEffect } from 'react';
-
 
 const ShowDetailsModal = ({ isOpen, onClose, showId }) => {
   const [showDetails, setShowDetails] = useState(null);
@@ -24,21 +22,30 @@ const ShowDetailsModal = ({ isOpen, onClose, showId }) => {
     <div className='modal-overlay'>
       <div className='modal'>
         <button className='close-button' onClick={onClose}>X</button>
-        <h2>{showDetails.name}</h2>
-        {showDetails.poster_path ? (
-          <img 
-            src={`https://image.tmdb.org/t/p/w200${showDetails.poster_path}`} 
-            alt={showDetails.name} 
-          />
-        ) : (
-          <div className='no-image'>No Image</div>
-        )}
-        <p>{showDetails.overview}</p>
-        <ul className='additional-details'>
-            <li>{showDetails.popularity}</li>
-            <li>{showDetails.runtime}</li>
-           <li>{showDetails.status = "Released" ? "Airing Now" : "Coming Soon"}</li>
-        </ul>
+        <div className='full-show-information'>
+          <div className='show-header'>
+            <h2>{showDetails.name}</h2>
+            {showDetails.poster_path ? (
+              <img 
+                src={`https://image.tmdb.org/t/p/w200${showDetails.poster_path}`} 
+                alt={showDetails.name} 
+              />
+            ) : (
+              <div className='no-image'>No Image</div>
+            )}
+            <button>Watch Now</button>
+            <button> Add To List +</button>
+          </div>
+          <div className='show-description'>
+            <h2>Show Overview</h2>
+            <p>{showDetails.overview}</p>
+            <ul className='additional-details'>
+              <li>{showDetails.popularity + " " + "Out of 10"}</li>
+              <li>{showDetails.runtime ? `${showDetails.runtime} mins` : "Regular Episodes [25 mins]"}</li>
+              <li>{showDetails.status === "Released" ? "Airing Now" : "Coming Soon"}</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   );

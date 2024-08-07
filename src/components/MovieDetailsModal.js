@@ -30,8 +30,9 @@ const MovieDetailsModal = ({ isOpen, onClose, movieId }) => {
         <button className='close-button' onClick={onClose}>X</button>
         {movieDetails ? (
           <>
+            <div className='full-movie-information'>
             <div className='movie-header'>
-            <h2>{movieDetails.title}</h2>
+            <h2 className="center">{movieDetails.title}</h2>
             <img 
               className='movie-image'
               src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`} 
@@ -40,12 +41,16 @@ const MovieDetailsModal = ({ isOpen, onClose, movieId }) => {
             <button> Add To List </button>
             <button> Watch Now</button>
             </div>
+            <div className='movie-description'>
+            <h2 className="center"> Movie Overview</h2>
             <p className='move-details'>{movieDetails.overview}</p>
             <ul className='additional-details'>
               <li>{movieDetails.popularity + " " + "Out of 10"}</li>
               <li>{movieDetails.runtime + " " + "Mintues"}</li>
               <li>{movieDetails.status = "Released" ? "Out In Theathers" : "Coming Soon"}</li>
             </ul>
+            </div>
+            </div>
           </>
         ) : (
           <p>Loading...</p>

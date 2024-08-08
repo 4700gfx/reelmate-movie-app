@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from '../assets/images/reelmate-logo.png';
 import instagram from '../assets/images/instagram.png';
 import facebook from '../assets/images/facebook-logo-in-circular-shape.png';
@@ -6,6 +6,8 @@ import twitter from '../assets/images/twitter.png';
 import youtube from '../assets/images/youtube.png';
 
 const Navbar = ({ onSearch, lists, onOpenList, onCreate }) => {
+  const [query, setQuery] = useState('');
+
   const tabs = {
     home: 'Home',
     library: 'Library',
@@ -24,6 +26,10 @@ const Navbar = ({ onSearch, lists, onOpenList, onCreate }) => {
     onCreate(); // Open Create List Modal
   };
 
+  const handleSearchClick = () => {
+    onSearch(query);
+  };
+
   return (
     <header>
       <nav>
@@ -32,8 +38,10 @@ const Navbar = ({ onSearch, lists, onOpenList, onCreate }) => {
           <input
             className='input'
             placeholder='Search Here'
-            onChange={(e) => onSearch(e.target.value)}
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
           />
+          <button onClick={handleSearchClick}>Search</button>
         </div>
         <ul>
           {Object.keys(tabs).map(tab => (

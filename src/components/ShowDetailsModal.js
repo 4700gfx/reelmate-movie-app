@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const ShowDetailsModal = ({ isOpen, onClose, showId }) => {
+const ShowDetailsModal = ({ isOpen, onClose, showId, onAddToList }) => {
   const [showDetails, setShowDetails] = useState(null);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const ShowDetailsModal = ({ isOpen, onClose, showId }) => {
               <div className='no-image'>No Image</div>
             )}
             <button>Watch Now</button>
-            <button> Add To List +</button>
+            <button onClick={() => onAddToList(showDetails)}> Add To List +</button>
           </div>
           <div className='show-description'>
             <h2>Show Overview</h2>

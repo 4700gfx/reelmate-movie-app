@@ -1,4 +1,3 @@
-// App.js
 import React, { useState } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
@@ -8,7 +7,10 @@ import Modal from './components/Modal';
 import DetailedModal from './components/DetailedModal';
 import ActorMoviesModal from './components/ActorMoviesModal';
 import MovieDetailsModal from './components/MovieDetailsModal';
-import ShowDetailsModal from './components/ShowDetailsModal'; // Add this import
+import ShowDetailsModal from './components/ShowDetailsModal';
+import CreateListModal from './components/CreateListModal';
+import ConfirmAddModal from './components/ConfirmAddModal';
+import ListModal from './components/ListModal';
 
 const API_KEY = '57e7da297e7cfe3c1ceff135422b6c96'; 
 const BASE_URL = 'https://api.themoviedb.org/3';
@@ -18,12 +20,21 @@ function App() {
   const [isDetailedModalOpen, setIsDetailedModalOpen] = useState(false);
   const [isActorMoviesModalOpen, setIsActorMoviesModalOpen] = useState(false);
   const [isMovieDetailsModalOpen, setIsMovieDetailsModalOpen] = useState(false);
-  const [isShowDetailsModalOpen, setIsShowDetailsModalOpen] = useState(false); // Add this state
+  const [isShowDetailsModalOpen, setIsShowDetailsModalOpen] = useState(false);
+  const [isCreateListModalOpen, setIsCreateListModalOpen] = useState(false);
+  const [isConfirmAddModalOpen, setIsConfirmAddModalOpen] = useState(false);
+  const [isListModalOpen, setIsListModalOpen] = useState(false);
+  
   const [results, setResults] = useState([]);
   const [detailedResults, setDetailedResults] = useState([]);
   const [actorId, setActorId] = useState(null);
   const [movieId, setMovieId] = useState(null);
-  const [showId, setShowId] = useState(null); // Add this state
+  const [showId, setShowId] = useState(null);
+  const [lists, setLists] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
+  const [itemToAdd, setItemToAdd] = useState(null);
+  const [currentList, setCurrentList] = useState(null);
+  const [selectedList, setSelectedList] = useState(null);
 
   const handleSearch = async (query) => {
     const response = await fetch(`${BASE_URL}/search/multi?api_key=${API_KEY}&query=${query}`);
@@ -59,9 +70,45 @@ function App() {
     setIsShowDetailsModalOpen(true);
   };
 
+  const handleCreateList = (listName) => {
+    setLists([...lists, { name: listName, items: [] }]);
+    setIsCreateListModalOpen(false);
+  };
+
+  const handleSearchForList = async (query) => {
+    const response = await fetch(`${BASE_URL}/search/multi?api_key=${API_KEY}&query=${query}`);
+    const data = await response.json();
+    setSearchResults(data.results);
+  };
+
+  const handleAddToList = (item) => {
+    setItemToAdd(item);
+    setIsConfirmAddModalOpen(true);
+  };
+
+  const handleConfirmAdd = (item, listName) => {
+    setLists(lists.map(list =>
+      list.name === listName
+        ? { ...list, items: [...list.items, item] }
+        : list
+    ));
+    setIsConfirmAddModalOpen(false);
+  };
+
+  const handleOpenList = (listName) => {
+    const list = lists.find(list => list.name === listName);
+    setCurrentList(list);
+    setIsListModalOpen(true);
+  };
+
   return (
     <div className='App'>
-      <Navbar onSearch={handleSearch} />
+      <Navbar
+        onSearch={handleSearch}
+        lists={lists}
+        onOpenList={handleOpenList}
+        onCreate={() => setIsCreateListModalOpen(true)} // Ensure CreateListModal is triggered
+      />
       <div className='app-content'>
         <Main />
         <MovieList />
@@ -78,7 +125,7 @@ function App() {
         results={detailedResults}
         onActorClick={handleActorClick}
         onMovieClick={handleMovieClick}
-        onShowClick={handleShowClick} // Pass the callback
+        onShowClick={handleShowClick}
       />
       <ActorMoviesModal
         isOpen={isActorMoviesModalOpen}
@@ -90,11 +137,33 @@ function App() {
         isOpen={isMovieDetailsModalOpen}
         onClose={() => setIsMovieDetailsModalOpen(false)}
         movieId={movieId}
+        onAddToList={handleAddToList}
       />
       <ShowDetailsModal
         isOpen={isShowDetailsModalOpen}
         onClose={() => setIsShowDetailsModalOpen(false)}
         showId={showId}
+        onAddToList={handleAddToList}
+      />
+      <CreateListModal
+        isOpen={isCreateListModalOpen}
+        onClose={() => setIsCreateListModalOpen(false)}
+        onCreate={handleCreateList}
+        onSearch={handleSearchForList}
+        searchResults={searchResults}
+        onAddToList={handleAddToList}
+      />
+      <ConfirmAddModal
+        isOpen={isConfirmAddModalOpen}
+        onClose={() => setIsConfirmAddModalOpen(false)}
+        lists={lists}
+        onConfirm={handleConfirmAdd}
+        item={itemToAdd}
+      />
+      <ListModal
+        isOpen={isListModalOpen}
+        onClose={() => setIsListModalOpen(false)}
+        list={currentList}
       />
     </div>
   );

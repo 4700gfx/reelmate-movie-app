@@ -1,14 +1,11 @@
-// Navbar.js
-import React, { useState } from 'react';
+import React from 'react';
 import logo from '../assets/images/reelmate-logo.png';
 import instagram from '../assets/images/instagram.png';
 import facebook from '../assets/images/facebook-logo-in-circular-shape.png';
 import twitter from '../assets/images/twitter.png';
 import youtube from '../assets/images/youtube.png';
 
-const Navbar = ({ onSearch }) => {
-  const [query, setQuery] = useState('');
-
+const Navbar = ({ onSearch, lists, onOpenList, onCreate }) => {
   const tabs = {
     home: 'Home',
     library: 'Library',
@@ -23,8 +20,8 @@ const Navbar = ({ onSearch }) => {
     youtube: youtube,
   };
 
-  const handleSearch = () => {
-    onSearch(query);
+  const handleCreateListClick = () => {
+    onCreate(); // Open Create List Modal
   };
 
   return (
@@ -35,12 +32,9 @@ const Navbar = ({ onSearch }) => {
           <input
             className='input'
             placeholder='Search Here'
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => onSearch(e.target.value)}
           />
-          <button onClick={handleSearch}>Search</button>
         </div>
-
         <ul>
           {Object.keys(tabs).map(tab => (
             <li key={tab}>{tabs[tab]}</li>
@@ -50,22 +44,13 @@ const Navbar = ({ onSearch }) => {
         <div className='list-section'>
           <h4>WATCH LIST</h4>
           <ul>
-            <li>Anime</li>
-            <li>Movies</li>
-            <li>Denzel Movies</li>
+            {lists.map(list => (
+              <li key={list.name} onClick={() => onOpenList(list.name)}>
+                {list.name}
+              </li>
+            ))}
           </ul>
-        </div>
-
-        <div className='list-section'>
-          <h4>CATEGORIES</h4>
-          <ul>
-            <li>Drama</li>
-            <li>Action</li>
-            <li>Comedies</li>
-            <li>Anime</li>
-            <li>Marvel/DC Movies</li>
-            <li>Documentaries</li>
-          </ul>
+          <button onClick={handleCreateListClick}>+ Create A List</button>
         </div>
 
         <div className='social-console'>
@@ -75,9 +60,6 @@ const Navbar = ({ onSearch }) => {
             </a>
           ))}
         </div>
-
-        <button> + Create A List</button>
-        <button>Sign In</button>
       </nav>
     </header>
   );

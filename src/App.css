@@ -469,7 +469,7 @@
 
 
 .close-button {
-  background: red;
+  background-color: #ff6347;
   color: white;
   border: none;
   padding: 10px;
@@ -534,3 +534,41 @@
   margin-right: 20px;
 }
 
+/* List Modal Stylesheet */
+
+.list-item{
+  display: flex;
+  flex-direction: row;
+}
+
+
+.list-item img{
+  width: 15%;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+.list-item li{
+  display: flex;
+  flex-direction: column;
+  font-style: italic;
+  font-weight: 600;
+  list-style-type: none;
+}
+
+.list-item button{
+  border: 2px solid rgba(242, 155, 48);
+  background-color: rgba(242, 155, 48);
+  font-family: inherit;
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
+  font-size: 13px;
+  height: 30px;
+  width: 100px;
+  margin: 5px auto;
+  margin-inline-end: 10px;
+  color: rgba(245, 245, 245, 1);
+}
+.list-item button:hover{
+
+}

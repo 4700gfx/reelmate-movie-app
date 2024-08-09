@@ -1,8 +1,6 @@
-// components/DetailedModal.js
 import React from 'react';
 
-
-const DetailedModal = ({ isOpen, onClose, results, onActorClick, onMovieClick, onShowClick }) => {
+const DetailedModal = ({ isOpen, onClose, results, onActorClick, onMovieClick, onShowClick, onAddToList }) => {
   if (!isOpen) return null;
 
   const handleClick = (result) => {
@@ -45,7 +43,15 @@ const DetailedModal = ({ isOpen, onClose, results, onActorClick, onMovieClick, o
                 )}
                 <div className='result-text'>
                   <div className='result-title'>{result.title || result.name}</div>
-                  <button className='add-to-list-button'>Add To List +</button>
+                  <button 
+                    className='add-to-list-button' 
+                    onClick={(e) => {
+                      e.stopPropagation(); 
+                      onAddToList(result); 
+                    }}
+                  >
+                    Add To List +
+                  </button>
                 </div>
               </div>
             </li>
@@ -57,3 +63,4 @@ const DetailedModal = ({ isOpen, onClose, results, onActorClick, onMovieClick, o
 };
 
 export default DetailedModal;
+

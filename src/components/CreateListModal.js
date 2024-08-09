@@ -25,7 +25,7 @@ const CreateListModal = ({ isOpen, onClose, onCreate, onSearch, searchResults, o
           value={listName}
           onChange={(e) => setListName(e.target.value)}
         />
-        <button onClick={handleCreateList}>Create List</button>
+        <button className='search-button' onClick={handleCreateList}>Create List</button>
         <h3>Search for Shows/Movies</h3>
         <input
           type='text'
@@ -33,13 +33,21 @@ const CreateListModal = ({ isOpen, onClose, onCreate, onSearch, searchResults, o
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-        <button onClick={handleSearch}>Search</button>
+        <button className='search-button' onClick={handleSearch}>Search</button>
         <ul>
           {searchResults.map((item) => (
+            <div className='search-item'>
+              <img 
+                src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} 
+                alt={item.title} 
+              />
             <li key={item.id}>
-              {item.name || item.title}
-              <button onClick={() => onAddToList(item)}>Add to List</button>
+            <div className='search-item-console'>
+            {item.name || item.title}
+            <button onClick={() => onAddToList(item)}>Add to List</button>
+            </div>
             </li>
+            </div>
           ))}
         </ul>
       </div>

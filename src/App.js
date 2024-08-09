@@ -71,9 +71,20 @@ function App() {
   };
 
   const handleCreateList = (listName) => {
+    if (!listName) {
+      listName = 'My List';
+    }
+  
+    let duplicateCount = lists.filter(list => list.name.startsWith(listName)).length;
+  
+    if (duplicateCount > 0) {
+      listName = `${listName} ${duplicateCount + 1}`;
+    }
+  
     setLists([...lists, { name: listName, items: [] }]);
     setIsCreateListModalOpen(false);
   };
+  
 
   const handleSearchForList = async (query) => {
     const response = await fetch(`${BASE_URL}/search/multi?api_key=${API_KEY}&query=${query}`);
@@ -84,8 +95,9 @@ function App() {
   const handleAddToList = (item) => {
     setItemToAdd(item);
     setIsConfirmAddModalOpen(true);
+    setIsDetailedModalOpen(false); // Close DetailedModal after adding
   };
-
+  
   const handleConfirmAdd = (item, listName) => {
     setLists(lists.map(list =>
       list.name === listName
@@ -107,8 +119,9 @@ function App() {
         onSearch={handleSearch}
         lists={lists}
         onOpenList={handleOpenList}
-        onCreate={() => setIsCreateListModalOpen(true)} // Ensure CreateListModal is triggered
+        onCreate={() => setIsCreateListModalOpen(true)} // This opens the Create List Modal
       />
+
       <div className='app-content'>
         <Main />
         <MovieList />
@@ -126,6 +139,7 @@ function App() {
         onActorClick={handleActorClick}
         onMovieClick={handleMovieClick}
         onShowClick={handleShowClick}
+        onAddToList={handleAddToList} // Pass handleAddToList here
       />
       <ActorMoviesModal
         isOpen={isActorMoviesModalOpen}
@@ -153,13 +167,17 @@ function App() {
         searchResults={searchResults}
         onAddToList={handleAddToList}
       />
+
       <ConfirmAddModal
         isOpen={isConfirmAddModalOpen}
-        onClose={() => setIsConfirmAddModalOpen(false)}
+        onClose={() => setIsConfirmAddModalOpen(false)} // This function will close the modal
         lists={lists}
         onConfirm={handleConfirmAdd}
         item={itemToAdd}
+        onAddToList={handleAddToList}
       />
+
+
       <ListModal
         isOpen={isListModalOpen}
         onClose={() => setIsListModalOpen(false)}

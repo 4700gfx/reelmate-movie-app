@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 
-const MovieDetailsModal = ({ isOpen, onClose, movieId }) => {
+const MovieDetailsModal = ({ isOpen, onClose, movieId, onAddToList }) => {
   const [movieDetails, setMovieDetails] = useState(null);
 
   useEffect(() => {
@@ -38,8 +38,8 @@ const MovieDetailsModal = ({ isOpen, onClose, movieId }) => {
               src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`} 
               alt={movieDetails.title} 
             />
-            <button> Add To List </button>
-            <button> Watch Now</button>
+            <button> Watch Now </button>
+            <button onClick={() => onAddToList(movieDetails)}> Add To List +</button>
             </div>
             <div className='movie-description'>
             <h2 className="center"> Movie Overview</h2>

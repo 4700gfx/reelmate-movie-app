@@ -70,7 +70,7 @@ const Navbar = ({ onSearch, lists, onOpenList, onCreate }) => {
         </div>
       </nav>
     </header>
-  );
+  )
 };
 
 export default Navbar;

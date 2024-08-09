@@ -572,3 +572,81 @@
 .list-item button:hover{
 
 }
+
+.create-list-modal input{
+  height: 20px;
+  width: 250px;
+  border-radius: 5px;
+  border: .5px solid rgba(242, 155, 48);
+  margin-right: 10px;
+
+}
+
+.create-list-modal ul{
+  list-style-type: none;
+  padding: 0;
+  margin: 30px auto;
+
+}
+
+.search-button{
+  height: 30px;
+  width: 100px;
+  border: 2px solid rgba(242, 155, 48);
+  background-color: rgba(242, 155, 48);
+  color: white;
+  margin: 5px 0px;
+  font-family: inherit;
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
+  font-size: 13px;
+}
+
+
+
+
+
+
+
+
+.search-item{
+  margin: 10px auto;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  font-weight: 700;
+}
+
+
+.search-item button{
+  height: 25px;
+  width: 150px;
+  border: 2px solid rgba(242, 155, 48);
+  background-color: rgba(242, 155, 48);
+  margin: 10px 0px;
+  font-family: inherit;
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
+  font-size: 13px;
+}
+
+
+.search-item button:hover{
+  background-color: rgba(245, 245, 245, 1);
+  color: rgba(242, 155, 48, 1);
+  border-color: rgba(245, 245, 245, 1);
+}
+
+
+.create-list-modal img {
+  width: 10%;
+  margin-right: 10px;
+  border-radius: 10px;
+}
+
+.search-item-console{
+  display: flex;
+  flex-direction: column;
+}
+
+

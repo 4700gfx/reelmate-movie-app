@@ -107,8 +107,9 @@
 }
 
 .list-section {
-  margin-top: 20px;
+  margin-top: 5px;
   width: 100%;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: flex-start; /* Align items to the left */
@@ -128,23 +129,42 @@
   flex-direction: column;
   align-items: flex-start; /* Align items to the left */
   width: 100%;
+  
 }
 
 .list-section li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   width: 100%;
   text-align: left; /* Align text to the left */
   padding: 10px 20px; /* Add padding for better appearance */
-  padding-left: 20px; /* Move the list items more to the left */
+  padding-left: 12px; /* Move the list items more to the left */
   cursor: pointer;
   transition: all 0.4s ease-in-out;
 }
 
 .list-section li:hover {
   color: rgba(245, 245, 245, 1);
+  width: 80%;
   font-weight: 900;
   background-color: rgba(8, 9, 13, 1);
-  transform: scale(1.05); /* Slightly enlarge on hover */
+  transform: scale(1.02); /* Slightly enlarge on hover */
 }
+
+
+
+
+.watch-list span{
+  margin: auto 15px;
+
+}
+
+.watch-list span:hover{
+  color: red;
+}
+
+
 
 .search-console {
   display: block;

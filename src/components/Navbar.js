@@ -5,7 +5,7 @@ import facebook from '../assets/images/facebook-logo-in-circular-shape.png';
 import twitter from '../assets/images/twitter.png';
 import youtube from '../assets/images/youtube.png';
 
-const Navbar = ({ onSearch, lists, onOpenList, onCreate }) => {
+const Navbar = ({ onSearch, lists, onOpenList, onCreate, onRemoveList }) => {
   const [query, setQuery] = useState('');
 
   const tabs = {
@@ -30,6 +30,10 @@ const Navbar = ({ onSearch, lists, onOpenList, onCreate }) => {
     onSearch(query);
   };
 
+  const handleRemoveListClick = (listName) => {
+    onRemoveList(listName); // Calls the parent function to remove the list
+  };
+
   return (
     <header>
       <nav>
@@ -51,14 +55,23 @@ const Navbar = ({ onSearch, lists, onOpenList, onCreate }) => {
 
         <div className='list-section'>
           <h4>WATCH LIST</h4>
-          <ul>
+          <ul className='watch-list'>
             {lists.map(list => (
-              <li key={list.name} onClick={() => onOpenList(list.name)}>
-                {list.name}
+              <li 
+                key={list.name} 
+                onClick={() => onOpenList(list.name)}>
+                <p>{list.name}</p>
+                <span onClick={(e) => {
+                  e.stopPropagation(); // Prevent triggering onOpenList when clicking X
+                  handleRemoveListClick(list.name);
+                }}>
+                  X
+                </span>
               </li>
             ))}
           </ul>
           <button onClick={handleCreateListClick}>+ Create A List</button>
+          <button>Sign In</button>
         </div>
 
         <div className='social-console'>
@@ -70,7 +83,7 @@ const Navbar = ({ onSearch, lists, onOpenList, onCreate }) => {
         </div>
       </nav>
     </header>
-  )
+  );
 };
 
 export default Navbar;

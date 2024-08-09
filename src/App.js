@@ -113,13 +113,20 @@ function App() {
     setIsListModalOpen(true);
   };
 
+  const handleRemoveList = (listName) => {
+    setLists(lists.filter(list => list.name !== listName));
+  };
+
+
+
   return (
     <div className='App'>
       <Navbar
         onSearch={handleSearch}
         lists={lists}
         onOpenList={handleOpenList}
-        onCreate={() => setIsCreateListModalOpen(true)} // This opens the Create List Modal
+        onCreate={() => setIsCreateListModalOpen(true)}
+        onRemoveList={handleRemoveList} // Pass the remove function
       />
 
       <div className='app-content'>

@@ -16,6 +16,7 @@ const API_KEY = '57e7da297e7cfe3c1ceff135422b6c96';
 const BASE_URL = 'https://api.themoviedb.org/3';
 
 function App() {
+  //State Management of Modals
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDetailedModalOpen, setIsDetailedModalOpen] = useState(false);
   const [isActorMoviesModalOpen, setIsActorMoviesModalOpen] = useState(false);
@@ -25,6 +26,8 @@ function App() {
   const [isConfirmAddModalOpen, setIsConfirmAddModalOpen] = useState(false);
   const [isListModalOpen, setIsListModalOpen] = useState(false);
   
+
+  //State Magement of List, Movies, Actors and Results
   const [results, setResults] = useState([]);
   const [detailedResults, setDetailedResults] = useState([]);
   const [actorId, setActorId] = useState(null);
@@ -36,6 +39,8 @@ function App() {
   const [currentList, setCurrentList] = useState(null);
   const [selectedList, setSelectedList] = useState(null);
 
+
+  //Function to Add Search Item via API Calls
   const handleSearch = async (query) => {
     const response = await fetch(`${BASE_URL}/search/multi?api_key=${API_KEY}&query=${query}`);
     const data = await response.json();
@@ -43,6 +48,8 @@ function App() {
     setIsModalOpen(true);
   };
 
+
+  //Handle Functions for Different Query Parameters
   const handleOptionSelect = async (option) => {
     const response = await fetch(`${BASE_URL}/search/multi?api_key=${API_KEY}&query=${option.name || option.title}`);
     const data = await response.json();
@@ -70,6 +77,8 @@ function App() {
     setIsShowDetailsModalOpen(true);
   };
 
+
+  //Function to Name Unnamed Lists
   const handleCreateList = (listName) => {
     if (!listName) {
       listName = 'My List';
@@ -95,7 +104,7 @@ function App() {
   const handleAddToList = (item) => {
     setItemToAdd(item);
     setIsConfirmAddModalOpen(true);
-    setIsDetailedModalOpen(false); // Close DetailedModal after adding
+    setIsDetailedModalOpen(false); // Close Detailed Modal after adding
   };
   
   const handleConfirmAdd = (item, listName) => {

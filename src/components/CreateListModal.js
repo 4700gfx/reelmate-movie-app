@@ -42,7 +42,6 @@ const CreateListModal = ({ isOpen, onClose, onCreate, onSearch, searchResults, o
                 alt={item.title} 
               />
             <li key={item.id}>
-            <button>X</button>
             <div className='search-item-console'>
             {item.name || item.title}
             <button onClick={() => onAddToList(item)}>Add to List</button>

@@ -16,7 +16,7 @@ const API_KEY = '57e7da297e7cfe3c1ceff135422b6c96';
 const BASE_URL = 'https://api.themoviedb.org/3';
 
 function App() {
-  //State Management of Modals
+  // State Management of Modals
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDetailedModalOpen, setIsDetailedModalOpen] = useState(false);
   const [isActorMoviesModalOpen, setIsActorMoviesModalOpen] = useState(false);
@@ -25,9 +25,8 @@ function App() {
   const [isCreateListModalOpen, setIsCreateListModalOpen] = useState(false);
   const [isConfirmAddModalOpen, setIsConfirmAddModalOpen] = useState(false);
   const [isListModalOpen, setIsListModalOpen] = useState(false);
-  
 
-  //State Magement of List, Movies, Actors and Results
+  // State Management of List, Movies, Actors, and Results
   const [results, setResults] = useState([]);
   const [detailedResults, setDetailedResults] = useState([]);
   const [actorId, setActorId] = useState(null);
@@ -39,17 +38,23 @@ function App() {
   const [currentList, setCurrentList] = useState(null);
   const [selectedList, setSelectedList] = useState(null);
 
-
-  //Function to Add Search Item via API Calls
+  // Function to Add Search Item via API Calls
   const handleSearch = async (query) => {
-    const response = await fetch(`${BASE_URL}/search/multi?api_key=${API_KEY}&query=${query}`);
-    const data = await response.json();
-    setResults(data.results);
-    setIsModalOpen(true);
+    if (!query) return; // Avoid searching with empty query
+  
+    try {
+      const response = await fetch(`${BASE_URL}/search/multi?api_key=${API_KEY}&query=${query}`);
+      const data = await response.json();
+      setResults(data.results);
+      setIsModalOpen(true); // Open the modal to show results
+    } catch (error) {
+      console.error('Error fetching search results:', error);
+    }
   };
+  
+  
 
-
-  //Handle Functions for Different Query Parameters
+  // Handle Functions for Different Query Parameters
   const handleOptionSelect = async (option) => {
     const response = await fetch(`${BASE_URL}/search/multi?api_key=${API_KEY}&query=${option.name || option.title}`);
     const data = await response.json();
@@ -77,23 +82,21 @@ function App() {
     setIsShowDetailsModalOpen(true);
   };
 
-
-  //Function to Name Unnamed Lists
+  // Function to Name Unnamed Lists
   const handleCreateList = (listName) => {
     if (!listName) {
       listName = 'My List';
     }
-  
+
     let duplicateCount = lists.filter(list => list.name.startsWith(listName)).length;
-  
+
     if (duplicateCount > 0) {
       listName = `${listName} ${duplicateCount + 1}`;
     }
-  
+
     setLists([...lists, { name: listName, items: [] }]);
     setIsCreateListModalOpen(false);
   };
-  
 
   const handleSearchForList = async (query) => {
     const response = await fetch(`${BASE_URL}/search/multi?api_key=${API_KEY}&query=${query}`);
@@ -106,13 +109,29 @@ function App() {
     setIsConfirmAddModalOpen(true);
     setIsDetailedModalOpen(false); // Close Detailed Modal after adding
   };
-  
+
   const handleConfirmAdd = (item, listName) => {
-    setLists(lists.map(list =>
-      list.name === listName
-        ? { ...list, items: [...list.items, item] }
-        : list
-    ));
+    const updatedLists = lists.map(list => {
+      const existingItem = list.items.find(i => i.id === item.id);
+      if (existingItem) {
+        // Increment the Watch Count if item already exists
+        return {
+          ...list,
+          items: list.items.map(i => i.id === item.id
+            ? { ...i, watchCount: (i.watchCount || 0) + 1 }
+            : i
+          )
+        };
+      } else {
+        // Add item if it does not exist
+        return {
+          ...list,
+          items: [...list.items, { ...item, watchCount: 1 }]
+        };
+      }
+    });
+
+    setLists(updatedLists);
     setIsConfirmAddModalOpen(false);
   };
 
@@ -126,7 +145,48 @@ function App() {
     setLists(lists.filter(list => list.name !== listName));
   };
 
+  const handleDeleteItem = (listName, itemId) => {
+    setLists(prevLists =>
+      prevLists.map(list =>
+        list.name === listName
+          ? { ...list, items: list.items.filter(item => item.id !== itemId) }
+          : list
+      )
+    );
+  };
 
+  const handleCompleteItem = (listName, item) => {
+    const completedListName = 'Completed';
+
+    setLists(prevLists => {
+      // Remove item from the current list
+      const updatedLists = prevLists.map(list =>
+        list.name === listName
+          ? { ...list, items: list.items.filter(i => i.id !== item.id) }
+          : list
+      );
+
+      // Add item to the Completed list or create one if it doesn't exist
+      const completedList = updatedLists.find(list => list.name === completedListName);
+      if (completedList) {
+        const existingItem = completedList.items.find(i => i.id === item.id);
+        if (existingItem) {
+          // Increment Watch Count for completed items
+          completedList.items = completedList.items.map(i =>
+            i.id === item.id
+              ? { ...i, watchCount: (i.watchCount || 0) + 1 }
+              : i
+          );
+        } else {
+          completedList.items.push({ ...item, watchCount: 1 });
+        }
+      } else {
+        updatedLists.push({ name: completedListName, items: [{ ...item, watchCount: 1 }] });
+      }
+
+      return updatedLists;
+    });
+  };
 
   return (
     <div className='App'>
@@ -135,19 +195,21 @@ function App() {
         lists={lists}
         onOpenList={handleOpenList}
         onCreate={() => setIsCreateListModalOpen(true)}
-        onRemoveList={handleRemoveList} // Pass the remove function
+        onRemoveList={handleRemoveList}
       />
+
 
       <div className='app-content'>
         <Main />
         <MovieList />
       </div>
-      <Modal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        results={results}
-        onOptionSelect={handleOptionSelect}
-      />
+        <Modal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          results={results}
+          onOptionSelect={handleOptionSelect}
+        />
+
       <DetailedModal
         isOpen={isDetailedModalOpen}
         onClose={() => setIsDetailedModalOpen(false)}
@@ -191,13 +253,16 @@ function App() {
         onConfirm={handleConfirmAdd}
         item={itemToAdd}
         onAddToList={handleAddToList}
+        onDeleteItem={handleDeleteItem} // Pass the delete function
+        onCompleteItem={handleCompleteItem} // Pass the complete function
       />
-
 
       <ListModal
         isOpen={isListModalOpen}
         onClose={() => setIsListModalOpen(false)}
         list={currentList}
+        onDeleteItem={handleDeleteItem}
+        onCompleteItem={handleCompleteItem}
       />
     </div>
   );

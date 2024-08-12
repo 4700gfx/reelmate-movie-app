@@ -153,25 +153,32 @@ function App() {
           : list
       )
     );
+  
+    // Update the current list to reflect the deletion in the modal
+    if (currentList?.name === listName) {
+      setCurrentList(prevList => ({
+        ...prevList,
+        items: prevList.items.filter(item => item.id !== itemId)
+      }));
+    }
   };
+  
+  
 
   const handleCompleteItem = (listName, item) => {
     const completedListName = 'Completed';
-
+  
     setLists(prevLists => {
-      // Remove item from the current list
       const updatedLists = prevLists.map(list =>
         list.name === listName
           ? { ...list, items: list.items.filter(i => i.id !== item.id) }
           : list
       );
-
-      // Add item to the Completed list or create one if it doesn't exist
+  
       const completedList = updatedLists.find(list => list.name === completedListName);
       if (completedList) {
         const existingItem = completedList.items.find(i => i.id === item.id);
         if (existingItem) {
-          // Increment Watch Count for completed items
           completedList.items = completedList.items.map(i =>
             i.id === item.id
               ? { ...i, watchCount: (i.watchCount || 0) + 1 }
@@ -183,10 +190,20 @@ function App() {
       } else {
         updatedLists.push({ name: completedListName, items: [{ ...item, watchCount: 1 }] });
       }
-
+  
+      // Update the current list to remove the completed item
+      if (currentList?.name === listName) {
+        setCurrentList(prevList => ({
+          ...prevList,
+          items: prevList.items.filter(i => i.id !== item.id)
+        }));
+      }
+  
       return updatedLists;
     });
   };
+  
+  
 
   return (
     <div className='App'>

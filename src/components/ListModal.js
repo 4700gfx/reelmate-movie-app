@@ -3,6 +3,8 @@ import React from 'react';
 const ListModal = ({ isOpen, onClose, list, onDeleteItem, onCompleteItem }) => {
   if (!isOpen) return null;
 
+  const isCompletedList = list?.name === 'Completed'; // Check if the list is "Completed"
+
   return (
     <div className='modal-overlay'>
       <div className='modal list-modal'>
@@ -22,8 +24,14 @@ const ListModal = ({ isOpen, onClose, list, onDeleteItem, onCompleteItem }) => {
                   <li>Type of Media: {item.media_type === "tv" ? "Television Show" : "Movie"}</li>
                   <li>First Episode Air Date: {item.first_air_date || item.release_date}</li>
                   <li>{item.popularity} Out of 100</li>
-                  <button onClick={() => onCompleteItem(list.name, item)}>Completed</button>
-                  <button onClick={() => onDeleteItem(list.name, item.id)}>Delete</button>
+                  {item.watchCount && <li>Watch Count: {item.watchCount}</li>}
+                  
+                  {!isCompletedList && (
+                    <>
+                      <button onClick={() => onCompleteItem(list.name, item)}>Completed</button>
+                      <button onClick={() => onDeleteItem(list.name, item.id)}>Delete</button>
+                    </>
+                  )}
                 </div>
               </div>
             ))

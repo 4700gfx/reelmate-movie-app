@@ -4,7 +4,7 @@ import axios from 'axios';
 // TMDB API Key
 const TMDB_API_KEY = '57e7da297e7cfe3c1ceff135422b6c96';
 
-const MovieList = () => {
+const MovieList = ({ completedList }) => {
   const [animeList, setAnimeList] = useState([]);
   const [tvList, setTvList] = useState([]);
   const [actorList, setActorList] = useState([]);
@@ -14,7 +14,6 @@ const MovieList = () => {
       try {
         const response = await axios.get(`https://api.themoviedb.org/3/discover/tv?api_key=${TMDB_API_KEY}&with_genres=16&with_original_language=ja&language=en-US&sort_by=popularity.desc&page=1`);
         setAnimeList(response.data.results.slice(0, 4)); // Get top 4 animes
-        console.log(response.data.results);
       } catch (error) {
         console.error('Error fetching anime:', error);
       }
@@ -23,8 +22,7 @@ const MovieList = () => {
     const fetchTvShows = async () => {
       try {
         const response = await axios.get(`https://api.themoviedb.org/3/tv/popular?api_key=${TMDB_API_KEY}&language=en-US&page=1`);
-        setTvList(response.data.results.slice(0, 4)); // Get top 5 TV shows
-        console.log(response.data.results);
+        setTvList(response.data.results.slice(0, 4)); // Get top 4 TV shows
       } catch (error) {
         console.error('Error fetching TV shows:', error);
       }
@@ -34,7 +32,6 @@ const MovieList = () => {
       try {
         const response = await axios.get(`https://api.themoviedb.org/3/person/popular?api_key=${TMDB_API_KEY}&language=en-US&page=1`);
         setActorList(response.data.results.slice(0, 4)); // Get top 4 actors
-        console.log(response.data.results);
       } catch (error) {
         console.error('Error fetching actors:', error);
       }
@@ -108,6 +105,32 @@ const MovieList = () => {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="completed-container">
+        <h1 className="center">Completed Movies</h1>
+        <div className="completed-list">
+          {completedList.length ? (
+            completedList.map((item, index) => (
+              <div key={item.id} className="completed-card">
+                <img 
+                  src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} 
+                  alt={item.name || item.title} 
+                />
+                <div className="completed-info">
+                  <h3>{item.name || item.title}</h3>
+                </div>
+                <div className="completed-hover-info">
+                  <p className="rank-title">Rank: {index + 1}</p>
+                  <p>{item.overview}</p>
+                  {item.watchCount && <p>Watch Count: {item.watchCount}</p>}
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>No Completed Movies yet.</p>
+          )}
         </div>
       </section>
     </>

@@ -27,7 +27,7 @@ const Main = () => {
 
   return (
     <div className='carousel-container'>
-      <h1 className='center'> OUT NOW</h1>
+      <h1 className='center'>MOVIES OUT NOW</h1>
       <section>
       {/* Checks To See If The Movie Data Array Length Is More Than Zero */}
       {movies.length > 0 ? (
@@ -42,6 +42,7 @@ const Main = () => {
                   <h3>{movie.title}</h3>
                   <p>{movie.overview}</p>
                   <button> Watch Now </button>
+                  <button> Add to List</button>
                 </div>
               </div>
             </div>
@@ -52,33 +53,33 @@ const Main = () => {
       )}
       </section>
       
-      <h1 className='center'>HOW TO USE THIS APP</h1>
+      <h1 className='center'>HOW TO USE THE APP</h1>
       <div className='instruction-container'>
 
         <div className='instruction'>
         <h2>Press Create A List</h2>
         <p>
-        Press Create a List to Start Looking Into Our Database of Different Actors, Shows and Movies. Add The The Name and Purpose of Your List. 
+          Start by clicking "Create a List", this will create a list that you can add some of your favorite Movies and Shows to watch for later. Click on the items for a synopsis of the Movie/Show.
         </p>
         </div>
 
         <div className='instruction'>
           <h2>Search Your Favorites</h2>
           <p>
-            Search for your favorites within our database of different actors, shows and movies. Filter down your options to the our database of different actor, shows and movies. 
+            Search for your favorites within our database of different actors, shows and movies. Filter down your options to the our database of different actor, shows and movies to add to your favorite lists.
           </p>
         </div>
 
         <div className='instruction'>
           <h2>Add To Your List</h2>
           <p>
-            Add to your list of favorites and organize them into different actors, catagories and more. Switch to checklist mode to turn your movie list into a watch list. 
+            Add to your list of favorites and organize them into different actors, catagories and more. Your different lists will show up on the side panel, You can refer to the tab for your lists of favorites.  
           </p>
         </div>
         <div className='instruction'>
           <h2>Check Off When Done</h2>
           <p>
-            Check off the list of episodes when watched and share different reviews of your favorite shows.
+            Check off the list of episodes when watched and share different reviews of your favorite shows. You can add the same items again and check them off. Refer to our watch count to see how many times you have watched a show or movie.
           </p>
         </div>  
       </div>

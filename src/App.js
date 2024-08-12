@@ -36,7 +36,7 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [itemToAdd, setItemToAdd] = useState(null);
   const [currentList, setCurrentList] = useState(null);
-  const [selectedList, setSelectedList] = useState(null);
+  const [completedList, setCompletedList] = useState([]); // Ensure this is initialized
 
   // Function to Add Search Item via API Calls
   const handleSearch = async (query) => {
@@ -51,8 +51,6 @@ function App() {
       console.error('Error fetching search results:', error);
     }
   };
-  
-  
 
   // Handle Functions for Different Query Parameters
   const handleOptionSelect = async (option) => {
@@ -162,8 +160,6 @@ function App() {
       }));
     }
   };
-  
-  
 
   const handleCompleteItem = (listName, item) => {
     const completedListName = 'Completed';
@@ -201,9 +197,21 @@ function App() {
   
       return updatedLists;
     });
+
+    // Ensure completed items are also reflected in the completed list state
+    setCompletedList(prevCompletedList => {
+      const existingItemIndex = prevCompletedList.findIndex(i => i.id === item.id);
+      if (existingItemIndex > -1) {
+        return prevCompletedList.map((i, index) =>
+          index === existingItemIndex
+            ? { ...i, watchCount: (i.watchCount || 0) + 1 }
+            : i
+        );
+      } else {
+        return [...prevCompletedList, { ...item, watchCount: 1 }];
+      }
+    });
   };
-  
-  
 
   return (
     <div className='App'>
@@ -213,19 +221,21 @@ function App() {
         onOpenList={handleOpenList}
         onCreate={() => setIsCreateListModalOpen(true)}
         onRemoveList={handleRemoveList}
+        completedList={completedList} // Pass completedList
+        setCompletedList={setCompletedList} // Pass setCompletedList if needed in Navbar
       />
-
 
       <div className='app-content'>
         <Main />
-        <MovieList />
+        <MovieList completedList={completedList} /> {/* Pass completedList */}
       </div>
-        <Modal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          results={results}
-          onOptionSelect={handleOptionSelect}
-        />
+      
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        results={results}
+        onOptionSelect={handleOptionSelect}
+      />
 
       <DetailedModal
         isOpen={isDetailedModalOpen}
@@ -234,7 +244,7 @@ function App() {
         onActorClick={handleActorClick}
         onMovieClick={handleMovieClick}
         onShowClick={handleShowClick}
-        onAddToList={handleAddToList} // Pass handleAddToList here
+        onAddToList={handleAddToList}
       />
       <ActorMoviesModal
         isOpen={isActorMoviesModalOpen}
@@ -265,13 +275,13 @@ function App() {
 
       <ConfirmAddModal
         isOpen={isConfirmAddModalOpen}
-        onClose={() => setIsConfirmAddModalOpen(false)} // This function will close the modal
+        onClose={() => setIsConfirmAddModalOpen(false)}
         lists={lists}
         onConfirm={handleConfirmAdd}
         item={itemToAdd}
         onAddToList={handleAddToList}
-        onDeleteItem={handleDeleteItem} // Pass the delete function
-        onCompleteItem={handleCompleteItem} // Pass the complete function
+        onDeleteItem={handleDeleteItem}
+        onCompleteItem={handleCompleteItem}
       />
 
       <ListModal
@@ -280,7 +290,9 @@ function App() {
         list={currentList}
         onDeleteItem={handleDeleteItem}
         onCompleteItem={handleCompleteItem}
+        completedList={completedList} // Pass completedList here
       />
+
     </div>
   );
 }

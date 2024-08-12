@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ListModal = ({ isOpen, onClose, list, onDeleteItem, onCompleteItem }) => {
+const ListModal = ({ isOpen, onClose, list, onDeleteItem, onCompleteItem, completedList }) => {
   if (!isOpen) return null;
 
   const isCompletedList = list?.name === 'Completed'; // Check if the list is "Completed"

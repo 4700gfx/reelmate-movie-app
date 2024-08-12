@@ -313,9 +313,13 @@
 
 .completed-container{
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+}
+
+.completed-list{
 }
 
 
@@ -387,6 +391,7 @@
   font-style: italic;
   font-size: 30px;
   color: #ff6347;
+  margin-bottom: -20px;
 }
 
 
